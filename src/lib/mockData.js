@@ -201,40 +201,30 @@ export const INITIAL_PRESENSI = [
 
 // Helper function to initialize localStorage data or refresh dataset
 export const initLocalStorageData = (forceReset = false) => {
-  // Always update dataset if existing dataset is old seed (less than 15 items)
-  let needsUpdate = forceReset
-  try {
-    const currentJadwals = JSON.parse(localStorage.getItem('sk_jadwal') || '[]')
-    if (currentJadwals.length < 10) {
-      needsUpdate = true
-    }
-  } catch (e) {
-    needsUpdate = true
-  }
+  const currentVersion = localStorage.getItem('sk_data_version')
+  const TARGET_VERSION = 'v2_nabila'
+
+  let needsUpdate = forceReset || currentVersion !== TARGET_VERSION
 
   if (needsUpdate || !localStorage.getItem('sk_profiles')) {
+    localStorage.setItem('sk_data_version', TARGET_VERSION)
     localStorage.setItem('sk_profiles', JSON.stringify(INITIAL_PROFILES))
-  }
-  if (needsUpdate || !localStorage.getItem('sk_kelas')) {
     localStorage.setItem('sk_kelas', JSON.stringify(INITIAL_KELAS))
-  }
-  if (needsUpdate || !localStorage.getItem('sk_mahasiswa')) {
     localStorage.setItem('sk_mahasiswa', JSON.stringify(INITIAL_MAHASISWA))
-  }
-  if (needsUpdate || !localStorage.getItem('sk_dosen')) {
     localStorage.setItem('sk_dosen', JSON.stringify(INITIAL_DOSEN))
-  }
-  if (needsUpdate || !localStorage.getItem('sk_mata_kuliah')) {
     localStorage.setItem('sk_mata_kuliah', JSON.stringify(INITIAL_MATA_KULIAH))
-  }
-  if (needsUpdate || !localStorage.getItem('sk_jadwal')) {
     localStorage.setItem('sk_jadwal', JSON.stringify(INITIAL_JADWAL))
-  }
-  if (needsUpdate || !localStorage.getItem('sk_pertemuan')) {
     localStorage.setItem('sk_pertemuan', JSON.stringify(INITIAL_PERTEMUAN))
-  }
-  if (needsUpdate || !localStorage.getItem('sk_presensi')) {
     localStorage.setItem('sk_presensi', JSON.stringify(INITIAL_PRESENSI))
+
+    // Fix active session if user was logged in as user-mhs-1 under old name
+    try {
+      const currentSession = JSON.parse(localStorage.getItem('sk_session') || 'null')
+      if (currentSession && (currentSession.id === 'user-mhs-1' || currentSession.nama?.includes('Dwi Cahyo'))) {
+        currentSession.nama = 'Nabila'
+        localStorage.setItem('sk_session', JSON.stringify(currentSession))
+      }
+    } catch (e) {}
   }
 
   // Clean up any corrupted empty string ID records
