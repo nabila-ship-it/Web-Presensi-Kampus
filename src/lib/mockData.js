@@ -3,7 +3,7 @@
 export const INITIAL_PROFILES = [
   {
     id: 'user-mhs-1',
-    nama: 'Dwi Cahyo Kuncoro',
+    nama: 'Nabila',
     email: 'mahasiswa@kampus.ac.id',
     role: 'mahasiswa',
     foto_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',

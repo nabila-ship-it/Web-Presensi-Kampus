@@ -248,7 +248,7 @@ export default function AdminMahasiswa() {
               required
               value={formData.nama}
               onChange={(e) => setFormData({ ...formData, nama: e.target.value })}
-              placeholder="Contoh: Dwi Cahyo Kuncoro"
+              placeholder="Contoh: Nabila"
               className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:bg-white focus:outline-none"
             />
           </div>

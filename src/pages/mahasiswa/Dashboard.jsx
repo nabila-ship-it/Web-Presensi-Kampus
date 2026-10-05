@@ -62,7 +62,7 @@ export default function MahasiswaDashboard() {
               Dashboard Mahasiswa
             </span>
             <h1 className="text-2xl sm:text-3xl font-extrabold mt-2 tracking-tight">
-              Selamat datang, {user?.nama || 'Dwi Cahyo Kuncoro'}!
+              Selamat datang, {user?.nama || 'Nabila'}!
             </h1>
             <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
               Semangat kuliah dan jangan lupa lakukan presensi tepat waktu hari ini.
